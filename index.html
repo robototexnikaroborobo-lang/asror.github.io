@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Rasm sifatini oshirish boti — Telegram'da rasmni tahrirlash</title>
+  <meta name="description" content="Rasmni Telegram botga yuboring: sifatini oshiring, o'lchamini o'zgartiring va hajmini kamaytiring. Alohida dastur o'rnatish shart emas.">
+  <link rel="canonical" href="https://SIZNING-SAYT.uz/">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%96%BC%EF%B8%8F%3C/text%3E%3C/svg%3E">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rasm sifatini oshirish boti">
+  <meta property="og:description" content="Rasmni Telegram botga yuboring: sifatini oshiring, o'lchamini o'zgartiring, hajmini kamaytiring.">
+  <meta property="og:url" content="https://SIZNING-SAYT.uz/">
+  <meta property="og:locale" content="uz_UZ">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Rasm tahrirlash boti",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Telegram",
+    "inLanguage": "uz",
+    "url": "https://SIZNING-SAYT.uz/",
+    "description": "Telegram'da rasm sifatini oshiradigan, o'lchamini o'zgartiradigan va hajmini kamaytiradigan bot."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Rasm sifatini qanday oshirish mumkin?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Rasmni botga yuboring va sifatni oshirish amalini tanlang. Bot tayyor rasmni shu chatning o'ziga qaytaradi."}
+      },
+      {
+        "@type": "Question",
+        "name": "Rasm o'lchamini qanday o'zgartiraman?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Rasmni yuborib, o'lchamni o'zgartirish amalini tanlang va kerakli o'lchamni kiriting."}
+      },
+      {
+        "@type": "Question",
+        "name": "Botdan foydalanish uchun nima kerak?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Faqat Telegram akkaunti kerak. Hech qanday dastur o'rnatish shart emas."}
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --paper: #f2f5f7;
+      --ink: #14202b;
+      --muted: #4d5f6e;
+      --line: #d3dde5;
+      --accent: #1478ad;
+      --accent-ink: #ffffff;
+      --sun: #f2b84b;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.65;
+    }
+    .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.25rem; }
+    .text { max-width: 62ch; }
+    a { color: var(--accent); }
+    a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible {
+      outline: 3px solid var(--accent); outline-offset: 3px;
+    }
+
+    header { border-bottom: 1px solid var(--line); }
+    .bar { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 0; gap: 1rem; flex-wrap: wrap; }
+    .brand { font-weight: 700; color: var(--ink); text-decoration: none; }
+    nav { display: flex; gap: 1.25rem; }
+    nav a { color: var(--ink); text-decoration: none; font-weight: 600; }
+    nav a:hover { color: var(--accent); }
+
+    .hero { display: grid; gap: 2.5rem; padding: 3.5rem 0 3rem; align-items: center; }
+    @media (min-width: 52rem) { .hero { grid-template-columns: 1fr 1fr; } }
+    h1 { font-size: clamp(2.1rem, 6vw, 3.4rem); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 1rem; }
+    .lead { font-size: 1.15rem; color: var(--muted); margin: 0 0 1.75rem; }
+    .btn {
+      display: inline-block; padding: 0.85rem 1.5rem; border-radius: 8px;
+      background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: 700;
+    }
+    .btn:hover { filter: brightness(1.1); }
+
+    /* Oldin / keyin taqqoslagich */
+    .compare { position: relative; aspect-ratio: 4 / 3; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: #fff; --pos: 50%; }
+    .compare svg.layer { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .compare .before { filter: blur(3.5px) saturate(0.55) contrast(0.85); }
+    .compare .after { clip-path: inset(0 0 0 var(--pos)); }
+    .compare .handle { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 3px; margin-left: -1.5px; background: #fff; box-shadow: 0 0 0 1px rgba(20,32,43,.25); pointer-events: none; }
+    .compare .tag { position: absolute; top: 0.6rem; padding: 0.15rem 0.6rem; border-radius: 4px; background: rgba(20,32,43,.78); color: #fff; font-size: 0.85rem; }
+    .compare .tag.l { left: 0.6rem; }
+    .compare .tag.r { right: 0.6rem; }
+    .compare input[type=range] { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+    .compare:focus-within { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .caption { margin: 0.6rem 0 0; font-size: 0.9rem; color: var(--muted); }
+
+    section { padding: 3rem 0; border-top: 1px solid var(--line); }
+    h2 { font-size: 1.7rem; margin: 0 0 1.25rem; letter-spacing: -0.01em; }
+    h3 { font-size: 1.15rem; margin: 0 0 0.25rem; }
+
+    .features { display: grid; gap: 1.75rem; }
+    @media (min-width: 52rem) { .features { grid-template-columns: repeat(3, 1fr); } }
+    .features p { margin: 0; color: var(--muted); }
+
+    ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; counter-reset: s; max-width: 62ch; }
+    ol.steps li { counter-increment: s; padding-left: 3rem; position: relative; }
+    ol.steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 2rem; height: 2rem; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: grid; place-items: center; }
+    ol.steps p { margin: 0; color: var(--muted); }
+
+    details { border-top: 1px solid var(--line); padding: 0.9rem 0; max-width: 62ch; }
+    details:last-of-type { border-bottom: 1px solid var(--line); }
+    summary { cursor: pointer; font-weight: 600; }
+    details p { margin: 0.6rem 0 0; color: var(--muted); }
+
+    .cta { text-align: left; }
+    footer { padding: 2rem 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap bar">
+      <a class="brand" href="#">Rasm tahrirlash boti</a>
+      <nav aria-label="Asosiy menyu">
+        <a href="#imkoniyatlar">Imkoniyatlar</a>
+        <a href="#qanday">Qanday ishlaydi</a>
+        <a href="#savollar">Savollar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="hero">
+        <div>
+          <h1>Rasm sifatini Telegram'ning o'zida oshiring</h1>
+          <p class="lead">Rasmni botga yuboring. Bot uni yaxshilab, kerakli o'lchamga keltirib, shu chatga qaytaradi. Dastur o'rnatish shart emas.</p>
+          <a class="btn" href="https://t.me/BOT_USERNAME">Botni Telegram'da ochish</a>
+        </div>
+
+        <div>
+          <div class="compare" id="compare">
+            <svg class="layer before" viewBox="0 0 400 300" aria-hidden="true"><use href="#scene"/></svg>
+            <svg class="layer after" viewBox="0 0 400 300" role="img" aria-label="Sifati oshirilgan rasm namunasi"><use href="#scene"/></svg>
+            <span class="tag l">Oldin</span>
+            <span class="tag r">Keyin</span>
+            <div class="handle"></div>
+            <input type="range" min="0" max="100" value="50" aria-label="Oldin va keyin rasmni solishtirish">
+          </div>
+          <p class="caption">Chiziqni suring: chapda oldingi, o'ngda tahrirdan keyingi ko'rinish (namuna).</p>
+        </div>
+      </div>
+
+      <section id="imkoniyatlar">
+        <h2>Bot nimalar qila oladi</h2>
+        <div class="features">
+          <div>
+            <h3>Rasm sifatini oshirish</h3>
+            <p>Xira yoki past sifatli rasmni yuboring, bot uni aniqroq qilib qaytaradi.</p>
+          </div>
+          <div>
+            <h3>O'lchamini o'zgartirish</h3>
+            <p>Rasmni kerakli kenglik va balandlikka keltiring: profil, e'lon yoki hujjat uchun.</p>
+          </div>
+          <div>
+            <h3>Hajmini kamaytirish</h3>
+            <p>Katta rasmni sifatini keskin yo'qotmasdan yengilroq qiling, jo'natish tezlashadi.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="qanday">
+        <h2>Qanday ishlaydi</h2>
+        <ol class="steps">
+          <li>
+            <h3>Botni oching</h3>
+            <p>Yuqoridagi tugma orqali botga o'ting va «Start» tugmasini bosing.</p>
+          </li>
+          <li>
+            <h3>Rasmni yuboring</h3>
+            <p>Rasmni oddiy xabar kabi yuboring va kerakli amalni tanlang.</p>
+          </li>
+          <li>
+            <h3>Tayyor rasmni oling</h3>
+            <p>Bot natijani shu chatning o'ziga qaytaradi. Uni saqlab olishingiz mumkin.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section id="savollar">
+        <h2>Ko'p so'raladigan savollar</h2>
+        <details>
+          <summary>Rasm sifatini qanday oshirish mumkin?</summary>
+          <p>Rasmni botga yuboring va sifatni oshirish amalini tanlang. Bot tayyor rasmni shu chatning o'ziga qaytaradi.</p>
+        </details>
+        <details>
+          <summary>Rasm o'lchamini qanday o'zgartiraman?</summary>
+          <p>Rasmni yuborib, o'lchamni o'zgartirish amalini tanlang va kerakli o'lchamni kiriting.</p>
+        </details>
+        <details>
+          <summary>Botdan foydalanish uchun nima kerak?</summary>
+          <p>Faqat Telegram akkaunti kerak. Hech qanday dastur o'rnatish shart emas.</p>
+        </details>
+      </section>
+
+      <section class="cta">
+        <h2>Birinchi rasmingizni yuboring</h2>
+        <p class="text" style="color:var(--muted);margin:0 0 1.5rem">Bot Telegram'ning ichida ishlaydi, shuning uchun boshlash uchun bitta tugma kifoya.</p>
+        <a class="btn" href="https://t.me/BOT_USERNAME">Botni Telegram'da ochish</a>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">© 2026 Rasm tahrirlash boti</div>
+  </footer>
+
+  <!-- Namuna rasm (oldin/keyin ikkalasida ham bir xil sahna ishlatiladi) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="scene" viewBox="0 0 400 300">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#7cc4ec"/>
+            <stop offset="1" stop-color="#e9f5fb"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="300" fill="url(#sky)"/>
+        <circle cx="318" cy="70" r="30" fill="#f2b84b"/>
+        <path d="M0 210 Q90 140 190 205 T400 190 V300 H0Z" fill="#4a9a6b"/>
+        <path d="M0 250 Q120 205 240 245 T400 235 V300 H0Z" fill="#2f7a52"/>
+        <rect x="140" y="160" width="110" height="80" fill="#f4e3c8"/>
+        <path d="M130 162 L195 112 L260 162Z" fill="#b5503c"/>
+        <rect x="182" y="198" width="26" height="42" fill="#5a3b2a"/>
+        <rect x="150" y="178" width="22" height="22" fill="#8fd0ee"/>
+        <rect x="220" y="178" width="22" height="22" fill="#8fd0ee"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <script>
+    var box = document.getElementById('compare');
+    var range = box.querySelector('input');
+    range.addEventListener('input', function () {
+      box.style.setProperty('--pos', range.value + '%');
+    });
+  </script>
+</body>
+</html>
